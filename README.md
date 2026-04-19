@@ -1,36 +1,44 @@
-# Playwright E2E Tests – SauceDemo
+Playwright QA Automation Project
 
-This project contains end-to-end automated tests for the SauceDemo application using Playwright.
+This project demonstrates end-to-end UI and API testing using Playwright with TypeScript.
 
-## 🔧 Tech Stack
+🔧 Tech Stack
+Playwright (TypeScript)
+Git & GitHub
+GitHub Actions (CI)
+🧪 Test Coverage
+✅ UI Tests (SauceDemo)
+Login functionality
+Product validation
+Add to cart
+Cart and checkout flow
+🌐 API Tests (Automation Exercise)
 
-* Playwright
-* TypeScript
-* Node.js
+API tests are implemented using real endpoints from Automation Exercise:
 
-## 📁 Test Structure
+GET /api/productsList
+Validate product list is returned
+POST /api/verifyLogin (valid credentials)
+Verify successful login
+POST /api/verifyLogin (invalid credentials)
+Validate error handling
+POST /api/createAccount
+Create new user with dynamic email
+⚙️ Continuous Integration
 
-* **auth** – login tests
-* **cart** – add/remove products
-* **checkout** – complete checkout flow + price validation
-* **sorting** – product sorting (A-Z, Z-A)
+Tests are automatically executed using GitHub Actions on every push.
 
-## ✅ Test Scenarios Covered
+✔ Installs dependencies
+✔ Runs Playwright tests
+✔ Reports pass/fail status
 
-* User login
-* Adding products to cart
-* Removing products from cart
-* Cart badge validation
-* Checkout process
-* Price consistency between Cart and Checkout
-* Product sorting
-
-## ▶️ How to Run Tests
-
-```bash
+🚀 How to Run Tests Locally
+npm install
 npx playwright test
-```
+📌 Notes
+API tests use form-data requests
+Dynamic data is used to avoid duplicate user creation
+Project demonstrates both UI and API testing approaches
+🔗 Project Link
 
-## 📌 Notes
-
-This project is part of my QA automation practice and demonstrates real-world E2E scenarios.
+https://github.com/duskaqa/PW-saucedemo-tests
