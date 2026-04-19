@@ -1,15 +1,11 @@
-import { expect, test, Page } from '@playwright/test';
-
+import { expect, test } from '@playwright/test';
+import { LoginPage } from '../../pages/loginPage';
   
-  async function login(page: Page) {
-    await page.goto('https://www.saucedemo.com');
-    await page.locator('#user-name').fill('standard_user')
-    await page.locator('#password').fill('secret_sauce');
-    await page.getByRole('button', { name: 'Login' }).click();
-  }
   test('logs in and shows products page', async ({ page }) => {
-    await login(page);
-
+    const loginPage = new LoginPage(page);
+    await loginPage.goto();
+    await loginPage.login('standard_user', 'secret_sauce');
+    
     await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
     await expect(page.locator('.title')).toHaveText('Products'); 
     const items = page.locator('.inventory_item');
@@ -25,4 +21,10 @@ import { expect, test, Page } from '@playwright/test';
     await expect(item.getByRole('button', { name: 'Add to cart' })).toBeVisible();
   }
 });
-
+test('shows error for invalid login', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+    await loginPage.goto();
+    await loginPage.login('wrong_user', 'wrong_pass');
+    await expect(page.locator('[data-test="error"]')).toBeVisible();
+    await expect(page.locator('[data-test="error"]')).toContainText('Username and password');
+  });

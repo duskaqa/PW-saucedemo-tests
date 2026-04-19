@@ -1,16 +1,14 @@
-import { expect, test, Page } from '@playwright/test';
-
+import { expect, test } from '@playwright/test';
+import { LoginPage } from '../../pages/loginPage';
   
-  async function login(page: Page) {
-    await page.goto('https://www.saucedemo.com');
-    await page.locator('#user-name').fill('standard_user')
-    await page.locator('#password').fill('secret_sauce');
-    await page.getByRole('button', { name: 'Login' }).click();
-  }
+  
+
   
 test('sort products by name', async ({ page }) => {
-  await login(page);
-
+const loginPage = new LoginPage(page);
+await loginPage.goto();
+await loginPage.login('standard_user', 'secret_sauce');
+        
   const productName = await page.locator('.inventory_item_name').allTextContents();
 
   await page.locator('.product_sort_container').selectOption('az');
